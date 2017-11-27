@@ -1,0 +1,8 @@
+language: java
+deploy:
+  provider: heroku
+  api_key:
+    secure: hTsQoKgIusDpYZYyjw4NA8fmx2cGXgYf6qQtuQNqRCkDs4/CCDHU42Ai/CITlV/3y8f4kLK3wZVLsajIvo7v9N/IN9ycoJ7saSrYHi9QdrIPGv/jkfMStp5pbTV4dx/7rFeZbJRY8XS18KtQEqVc4nZBFr/Q12WRnIua2zc03Zz7kb7viFjTMhCh23YA+8sPYdiGR0jAMue/xyWCERibLkKH7rPzoL+ZUF6bKokScVNntVGSiK9OALdhEh2RW3HDfqM1cBGpclWTiX9xenjfbTGp/zJApqUcdKLF8JEuulYpECXMs2wz+AufpC0FoI87iPb+8aH5FOLXtI3M6WMadYXeblUckkvDDTvQNR/aPT+KZ4hzTcjv5d+hytEJZosExiEWJDn6Lmdm2T0Z9DxN32wozM20w1K29L/8BKp/XYEMW7qv+QIgIoI0gj6h/cLmcnF/4xturg0vEPnfk5t5gEocBu9ICgQygDi/oCJFsleaovEdTVFiToMA0yd+Y2FDlEx1B7qWA5x5Lj3r5QBZeW6oQZlX6fMchpmufZ10Atk3oLgJw0iOoktQHwJXc57nAho3HJKL8YhEgrQ0DmAEOarh1DryZbTByvxr33JHMZeyUUjZ0t0loZ9dVaCuXWClVsmnwJ9osSaNqZSBf2vS294q27qTlNrQ6038XNNYfBA=
+  app: genuine-news
+  on:
+    repo: lex/genuine-news
