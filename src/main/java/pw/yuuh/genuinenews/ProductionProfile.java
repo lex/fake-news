@@ -1,4 +1,4 @@
-package com.example.fakenews;
+package pw.yuuh.genuinenews;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;

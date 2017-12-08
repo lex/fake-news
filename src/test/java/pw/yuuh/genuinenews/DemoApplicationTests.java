@@ -1,4 +1,4 @@
-package com.example.fakenews;
+package pw.yuuh.genuinenews;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
