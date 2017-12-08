@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genuine News - Authors</title>
+</head>
+<body>
+<h1>Authors</h1>
+<ol>
+    <li th:each="author :${authors}">
+        <span th:text="${author.name}">default</span>
+    </li>
+</ol>
+
+<h2>Add new author</h2>
+
+<form method="POST" th:action="@{/authors/}">
+    <input type="text" name="name"/>
+    <input type="submit"/>
+</form>
+
+</body>
+</html>

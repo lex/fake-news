@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genuine News - Categories</title>
+</head>
+<body>
+<h1>Categories</h1>
+<ol>
+    <li th:each="category :${categories}">
+        <span th:text="${category.name}">default</span>
+    </li>
+</ol>
+
+<h2>Add new category</h2>
+
+<form method="POST" th:action="@{/categories/}">
+    <input type="text" name="name"/>
+    <input type="submit"/>
+</form>
+
+</body>
+</html>
