@@ -7,8 +7,10 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -19,4 +21,7 @@ public class Author extends AbstractPersistable<Long> {
     @Column(unique=true)
     @Size(min = 2, max = 100)
     private String name;
+
+    @ManyToMany
+    private List<NewsItem> newsItems;
 }

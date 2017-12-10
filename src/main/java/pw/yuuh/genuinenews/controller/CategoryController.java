@@ -3,10 +3,7 @@ package pw.yuuh.genuinenews.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import pw.yuuh.genuinenews.domain.Category;
 import pw.yuuh.genuinenews.repository.CategoryRepository;
 
@@ -22,6 +19,14 @@ public class CategoryController {
     private String listCategories(Model model) {
         model.addAttribute("categories", categoryRepository.findAll());
         return "categories";
+    }
+
+
+    @GetMapping("/{id}")
+    public String showCategory(Model model, @PathVariable Long id) {
+        final Category c = categoryRepository.getOne(id);
+        model.addAttribute("category", c);
+        return "category";
     }
 
     @Transactional

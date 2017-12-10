@@ -6,10 +6,27 @@
     <title>Genuine News - News</title>
 </head>
 <body>
-<h1>News</h1>
+<h1>Genuine News</h1>
+
+Categories:
+<br>
+
+<ul>
+    <li th:each="category : ${categories}">
+        <a th:href="@{'/categories/' + ${category.id}}" th:text="${category.name}">default</a>
+    </li>
+</ul>
+
+Top news:
+<br>
+
 <ol>
-    <li th:each="newsItem :${news}">
-        <span th:text="${newsItem.title}">default</span>
+    <li th:each="newsItem : ${news}">
+        <h2 th:text="${newsItem.title}">default</h2>
+        <img th:src="${newsItem.image}" style="max-width: 420px;"/>
+        <p th:text="${newsItem.lead}">default</p>
+        <a th:href="@{'/news/' + ${newsItem.id}}">Read</a>
+        <p th:text="${'Read ' + newsItem.timesRead + ' times'}">default</p>
     </li>
 </ol>
 
@@ -34,17 +51,15 @@
         <br>
         Categories:
         <br>
-        <select th:field="*{categories}" multiple>
-            <option th:each="category : ${categories}"
-                    th:value="${{category.id}}"
-                    th:text="${category.name}">
 
-            </option>
-        </select>
+        <div th:each="category : ${categories}">
+            <input type="checkbox" th:value="${{category.id}}" th:field="*{categories}"/>
+            <span th:text="${category.name}">category</span>
+        </div>
 
         Authors:
         <br>
-        <div th:each="author: ${authors}">
+        <div th:each="author : ${authors}">
             <input type="checkbox" th:value="${{author.id}}" th:field="*{authors}"/>
             <span th:text="${author.name}">author</span>
         </div>

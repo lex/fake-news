@@ -40,10 +40,10 @@ public class NewsItem extends AbstractPersistable<Long> {
     private LocalDateTime publishedAt;
 
     @NotNull
-    @ManyToMany
+    @ManyToMany(mappedBy="newsItems")
     private List<Category> categories;
 
     @NotNull
-    @ManyToMany
+    @ManyToMany(mappedBy="newsItems")
     private List<Author> authors;
 }

@@ -1,10 +1,14 @@
 package pw.yuuh.genuinenews.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import pw.yuuh.genuinenews.domain.Author;
 import pw.yuuh.genuinenews.domain.Category;
 import pw.yuuh.genuinenews.domain.NewsItem;
 import pw.yuuh.genuinenews.repository.AuthorRepository;
@@ -28,21 +32,37 @@ public class NewsItemController {
 
     @GetMapping("/")
     public String listNews(Model model) {
-        model.addAttribute("news", newsItemRepository.findAll());
+        Pageable pageable = PageRequest.of(0, 100, Sort.Direction.DESC, "timesRead");
+        model.addAttribute("news", newsItemRepository.findAll(pageable));
         model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("authors", authorRepository.findAll());
         model.addAttribute("newnews", new NewsItem());
         return "news";
     }
 
+    @GetMapping("/{id}")
+    public String showNewsItem(Model model, @PathVariable Long id) {
+        NewsItem n = newsItemRepository.getOne(id);
+        n.setTimesRead(n.getTimesRead() + 1);
+        newsItemRepository.save(n);
+        model.addAttribute("newsItem", n);
+        return "newsitem";
+    }
+
     @Transactional
     @PostMapping("/")
-    //public String addNewsItem(@RequestParam String title, @RequestParam String lead, @RequestParam String image, @RequestParam String content) {
     public String addNewsItem(@Valid NewsItem n, BindingResult bindingResult) {
-        System.out.println(bindingResult);
-        System.out.println(n);
         n.setPublishedAt(LocalDateTime.now());
-        newsItemRepository.save(n);
-        return "redirect:/news/";
+        n = newsItemRepository.save(n);
+
+        for (Author a : n.getAuthors()) {
+            a.getNewsItems().add(n);
+        }
+
+        for (Category c : n.getCategories()) {
+            c.getNewsItems().add(n);
+        }
+
+        return "redirect:/news/" + n.getId();
     }
 }

@@ -3,10 +3,7 @@ package pw.yuuh.genuinenews.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import pw.yuuh.genuinenews.domain.Author;
 import pw.yuuh.genuinenews.repository.AuthorRepository;
 
@@ -22,6 +19,13 @@ public class AuthorController {
     private String listAuthors(Model model) {
         model.addAttribute("authors", authorRepository.findAll());
         return "authors";
+    }
+
+    @GetMapping("/{id}")
+    public String showAuthor(Model model, @PathVariable Long id) {
+        final Author a = authorRepository.getOne(id);
+        model.addAttribute("author", a);
+        return "author";
     }
 
     @Transactional
