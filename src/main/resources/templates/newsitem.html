@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${'Genuine News - ' + newsItem.title}">Genuine News</title>
+</head>
+<body>
+<h1 th:text="${newsItem.title}">default</h1>
+<br>
+<p th:text="${newsItem.publishedAt}">default</p>
+<p th:text="${'Read ' + newsItem.timesRead + ' times'}">default</p>
+<br>
+<img th:src="${newsItem.image}"/>
+<br>
+
+Authors:
+<br>
+<ul>
+    <li th:each="author : ${newsItem.authors}">
+        <a th:href="@{'/authors/' + ${author.id}}" th:text="${author.name}">default</a>
+    </li>
+</ul>
+<br>
+
+Categories:
+<br>
+<ul>
+    <li th:each="category : ${newsItem.categories}">
+        <a th:href="@{'/categories/' + ${category.id}}" th:text="${category.name}">default</a>
+    </li>
+</ul>
+<br>
+
+<h2 th:text="${newsItem.lead}">default</h2>
+<p th:text="${newsItem.content}">default</p>
+</body>
+</html>
